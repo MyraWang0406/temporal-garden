@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+  --bg: #10231e;
+  --panel: rgba(247, 239, 224, 0.92);
+  --panel-soft: rgba(255, 248, 236, 0.82);
+  --panel-solid: #fbf4e8;
+  --ink: #223127;
+  --ink-soft: #5d695d;
+  --accent: #d85b7a;
+  --accent-strong: #a7274b;
+  --leaf: #2f7d59;
+  --leaf-soft: #d8ecd9;
+  --gold: #efb449;
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.12);
+  --border-soft: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: 'Nunito', sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(239, 180, 73, 0.18), transparent 28%),
+    linear-gradient(180deg, #18362e 0%, #10231e 55%, #0a1512 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+main {
+  min-height: 100vh;
+}
+
+.site-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+}
+
+.site-header {
+  position: sticky;
+  top: 16px;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  padding: 16px 18px;
+  border-radius: 24px;
+  background: rgba(14, 31, 27, 0.72);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.brand-block {
+  display: grid;
+  gap: 4px;
+}
+
+.brand-title {
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 32px;
+  color: #fff6e8;
+}
+
+.brand-subtitle {
+  margin: 0;
+  color: #d7e6db;
+  font-size: 14px;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nav-link {
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: #f6eddc;
+  background: rgba(255, 255, 255, 0.06);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  background: #fff3dd;
+  color: #1f3027;
+  font-weight: 800;
+}
+
+.page-stack {
+  display: grid;
+  gap: 24px;
+}
+
+.card-surface {
+  background: rgba(250, 241, 226, 0.94);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.hero-section {
+  padding: 40px 32px;
+  display: grid;
+  gap: 16px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(47, 125, 89, 0.12);
+  color: var(--leaf);
+  font-weight: 800;
+}
+
+.hero-title {
+  margin: 0;
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: clamp(48px, 8vw, 84px);
+  line-height: 1.08;
+  color: var(--accent-strong);
+}
+
+.hero-subtitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--leaf);
+}
+
+.hero-description {
+  margin: 0;
+  max-width: 900px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.primary-cta,
+.secondary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.primary-cta {
+  background: var(--leaf);
+  color: #fff;
+}
+
+.secondary-cta {
+  background: #ece2d0;
+  color: var(--ink);
+}
+
+.page-section {
+  display: grid;
+  gap: 16px;
+}
+
+.section-heading h2,
+.info-card h2,
+.evaluation-section h2 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.section-heading p,
+.info-card p,
+.feature-card p,
+.evaluation-section p,
+.evaluation-section li {
+  margin: 0;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.three-col-grid,
+.feature-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.info-card,
+.feature-card,
+.evaluation-section,
+.metric-card,
+.case-card {
+  background: var(--panel);
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.info-card h3,
+.feature-card h3,
+.case-card h3 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.feature-card {
+  display: flex;
+  min-height: 180px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.feature-card span {
+  font-weight: 800;
+  color: var(--leaf);
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.muted-card {
+  background: rgba(236, 226, 208, 0.95);
+}
+
+.bullet-list {
+  margin: 4px 0 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 10px;
+  color: var(--ink-soft);
+}
+
+.site-footer {
+  display: grid;
+  gap: 10px;
+  color: var(--ink-soft);
+}
+
+.page-intro {
+  display: grid;
+  gap: 12px;
+}
+
+.page-intro h1 {
+  margin: 0;
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: 44px;
+  color: #fff0dc;
+}
+
+.page-intro p {
+  margin: 0;
+  max-width: 900px;
+  color: #dce9df;
+  line-height: 1.8;
+}
+
+.ai-note {
+  background: rgba(255, 248, 236, 0.92);
+  border: 1px solid rgba(47, 125, 89, 0.14);
+  border-radius: 22px;
+  padding: 18px;
+  line-height: 1.8;
+  box-shadow: var(--shadow-soft);
+}
+
+.ai-note h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  color: var(--leaf);
+}
+
+.evaluation-layout {
+  display: grid;
+  gap: 18px;
+}
+
+.metric-grid,
+.case-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.metric-card strong,
+.case-card strong,
+.evaluation-list strong {
+  color: var(--ink);
+}
+
+.metric-value {
+  margin-top: 10px;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--accent-strong);
+}
+
+.evaluation-list {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .split-section {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-section {
+    padding: 28px 22px;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell {
+    padding: 16px 14px 32px;
+  }
+
+  .site-header {
+    top: 10px;
+    padding: 14px;
+  }
+
+  .brand-title {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 20px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+
+  .card-surface,
+  .info-card,
+  .feature-card,
+  .evaluation-section,
+  .metric-card,
+  .case-card {
+    padding: 18px;
+  }
+}
