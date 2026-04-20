@@ -72,106 +72,141 @@ export function RoseFeedback({
   const deltaLabel = outcome === 'overflow' ? `超出目标 ${Number((rawCoveragePercent - 100).toFixed(2))}%` : `距离目标 ${difference}%`;
 
   return (
-    <section
-      style={{
-        background: copy.tone,
-        borderRadius: 24,
-        padding: 20,
-        boxShadow: '0 16px 40px rgba(18, 28, 23, 0.12)',
-        display: 'grid',
-        gap: 14,
-        border: `2px solid ${copy.border}`,
-      }}
-    >
-      <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', alignItems: 'start' }}>
-        <div>
-          <div style={{ fontSize: 13, color: '#6a7168', marginBottom: 6 }}>结果判断</div>
-          <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
-            <strong style={{ fontSize: 30, color: copy.badge }}>{copy.title}</strong>
-            <span
-              style={{
-                background: copy.badge,
-                color: '#fff',
-                borderRadius: 999,
-                padding: '6px 10px',
-                fontSize: 12,
-                fontWeight: 800,
-                letterSpacing: 0.4,
-              }}
-            >
-              {copy.badgeText}
-            </span>
+    <section className="feedback-container">
+      <div className="feedback-header">
+        <div className="result-info">
+          <div className="label">结果判断</div>
+          <div className="title-row">
+            <strong className="result-title">{copy.title}</strong>
+            <span className="result-badge">{copy.badgeText}</span>
           </div>
         </div>
 
-        <div
-          style={{
-            minWidth: 130,
-            background: 'rgba(255,255,255,0.72)',
-            borderRadius: 18,
-            padding: '10px 12px',
-            textAlign: 'right',
-          }}
-        >
-          <div style={{ fontSize: 12, color: '#6a7168' }}>最终覆盖</div>
-          <div style={{ fontSize: 34, fontWeight: 800, color: copy.badge }}>{finalCoveragePercent}%</div>
+        <div className="final-coverage-card">
+          <div className="label">最终覆盖</div>
+          <div className="coverage-value">{finalCoveragePercent}%</div>
         </div>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-          gap: 10,
-        }}
-      >
+      <div className="metrics-row">
         <MetricCard label="状态" value={copy.badgeText} accent={copy.badge} />
         <MetricCard label="目标差值" value={deltaLabel} accent={copy.badge} />
       </div>
 
-      {outcome === 'overflow' ? (
-        <div
-          style={{
-            background: 'rgba(255,255,255,0.72)',
-            borderRadius: 16,
-            padding: '10px 12px',
-            color: '#6a2440',
-            lineHeight: 1.6,
-          }}
-        >
+      {outcome === 'overflow' && (
+        <div className="overflow-note">
           真实覆盖率已经达到 {rawCoveragePercent}% ，只是舞台显示会封顶到 100%，所以它看起来像“满了”，但其实已经长过头。
         </div>
-      ) : null}
+      )}
 
-      <div style={{ display: 'grid', gap: 10 }}>
-        <RoleBubble title="守护兽" tone="rgba(255,255,255,0.72)" text={copy.guardian} />
-        <RoleBubble title="小同伴" tone="rgba(255,255,255,0.72)" text={copy.peer} />
-        <RoleBubble title="园丁导师" tone="rgba(255,255,255,0.72)" text={copy.mentor} />
+      <div className="role-bubbles">
+        <RoleBubble title="守护兽" text={copy.guardian} />
+        <RoleBubble title="小同伴" text={copy.peer} />
+        <RoleBubble title="园丁导师" text={copy.mentor} />
       </div>
+
+      <style jsx>{`
+        .feedback-container {
+          background: ${copy.tone};
+          border-radius: 24px;
+          padding: 20px;
+          box-shadow: 0 16px 40px rgba(18, 28, 23, 0.12);
+          display: grid;
+          gap: 16px;
+          border: 2px solid ${copy.border};
+        }
+
+        .feedback-header {
+          display: flex;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+          align-items: start;
+        }
+
+        .label { fontSize: 12px; color: #6a7168; margin-bottom: 4px; }
+        .title-row { display: flex; gap: 10px; alignItems: center; flex-wrap: wrap; }
+        .result-title { font-size: clamp(24px, 4vw, 30px); color: ${copy.badge}; }
+        
+        .result-badge {
+          background: ${copy.badge};
+          color: #fff;
+          border-radius: 999px;
+          padding: 4px 12px;
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0.4px;
+        }
+
+        .final-coverage-card {
+          min-width: 120px;
+          background: rgba(255,255,255,0.72);
+          border-radius: 18px;
+          padding: 10px 14px;
+          text-align: right;
+        }
+
+        .coverage-value { font-size: 32px; font-weight: 800; color: ${copy.badge}; }
+
+        .metrics-row {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+
+        .overflow-note {
+          background: rgba(255,255,255,0.72);
+          border-radius: 16px;
+          padding: 12px;
+          color: #6a2440;
+          line-height: 1.6;
+          font-size: 14px;
+        }
+
+        .role-bubbles { display: grid; gap: 10px; }
+
+        @media (max-width: 640px) {
+          .feedback-container { padding: 16px; }
+          .final-coverage-card { width: 100%; text-align: left; }
+          .metrics-row { grid-template-columns: 1fr; }
+        }
+      `}</style>
     </section>
   );
 }
 
 function MetricCard({ label, value, accent }: { label: string; value: string; accent: string }) {
   return (
-    <div
-      style={{
-        background: 'rgba(255,255,255,0.72)',
-        borderRadius: 16,
-        padding: '12px 14px',
-      }}
-    >
-      <div style={{ fontSize: 12, color: '#6a7168', marginBottom: 6 }}>{label}</div>
-      <div style={{ fontWeight: 800, color: accent, lineHeight: 1.5 }}>{value}</div>
+    <div className="metric-card">
+      <div className="metric-label">{label}</div>
+      <div className="metric-value">{value}</div>
+      <style jsx>{`
+        .metric-card {
+          background: rgba(255,255,255,0.72);
+          border-radius: 16px;
+          padding: 12px 14px;
+        }
+        .metric-label { font-size: 11px; color: #6a7168; margin-bottom: 4px; }
+        .metric-value { font-weight: 800; color: ${accent}; line-height: 1.4; font-size: 14px; }
+      `}</style>
     </div>
   );
 }
 
-function RoleBubble({ title, text, tone }: { title: string; text: string; tone: string }) {
+function RoleBubble({ title, text }: { title: string; text: string }) {
   return (
-    <div style={{ background: tone, borderRadius: 18, padding: '12px 14px' }}>
-      <div style={{ fontWeight: 800, marginBottom: 4 }}>{title}</div>
-      <div style={{ lineHeight: 1.6 }}>{text}</div>
+    <div className="role-bubble">
+      <div className="role-title">{title}</div>
+      <div className="role-text">{text}</div>
+      <style jsx>{`
+        .role-bubble {
+          background: rgba(255,255,255,0.72);
+          border-radius: 18px;
+          padding: 12px 14px;
+        }
+        .role-title { font-weight: 800; font-size: 14px; margin-bottom: 4px; color: #223127; }
+        .role-text { line-height: 1.6; font-size: 14px; color: #445046; }
+      `}</style>
     </div>
   );
 }

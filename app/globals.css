@@ -33,6 +33,7 @@ body {
   background:
     radial-gradient(circle at top, rgba(239, 180, 73, 0.18), transparent 28%),
     linear-gradient(180deg, #18362e 0%, #10231e 55%, #0a1512 100%);
+  overflow-x: hidden;
 }
 
 a {
@@ -63,7 +64,7 @@ main {
 .site-header {
   position: sticky;
   top: 16px;
-  z-index: 10;
+  z-index: 50;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -72,7 +73,7 @@ main {
   margin-bottom: 24px;
   padding: 16px 18px;
   border-radius: 24px;
-  background: rgba(14, 31, 27, 0.72);
+  background: rgba(14, 31, 27, 0.85);
   backdrop-filter: blur(12px);
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--border-soft);
@@ -98,15 +99,17 @@ main {
 .site-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .nav-link {
-  padding: 10px 14px;
+  padding: 8px 14px;
   border-radius: 999px;
   color: #f6eddc;
   background: rgba(255, 255, 255, 0.06);
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
+  font-size: 15px;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -151,14 +154,14 @@ main {
 .hero-title {
   margin: 0;
   font-family: 'ZCOOL XiaoWei', serif;
-  font-size: clamp(48px, 8vw, 84px);
-  line-height: 1.08;
+  font-size: clamp(36px, 8vw, 84px);
+  line-height: 1.1;
   color: var(--accent-strong);
 }
 
 .hero-subtitle {
   margin: 0;
-  font-size: 24px;
+  font-size: clamp(18px, 4vw, 24px);
   font-weight: 800;
   color: var(--leaf);
 }
@@ -166,8 +169,8 @@ main {
 .hero-description {
   margin: 0;
   max-width: 900px;
-  font-size: 18px;
-  line-height: 1.8;
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.7;
   color: var(--ink);
 }
 
@@ -184,9 +187,14 @@ main {
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  padding: 0 18px;
+  padding: 0 24px;
   border-radius: 999px;
   font-weight: 800;
+  transition: transform 0.2s ease;
+}
+
+.primary-cta:active, .secondary-cta:active {
+  transform: scale(0.96);
 }
 
 .primary-cta {
@@ -208,7 +216,7 @@ main {
 .info-card h2,
 .evaluation-section h2 {
   margin: 0;
-  font-size: 30px;
+  font-size: clamp(24px, 4vw, 30px);
 }
 
 .section-heading p,
@@ -217,7 +225,7 @@ main {
 .evaluation-section p,
 .evaluation-section li {
   margin: 0;
-  line-height: 1.8;
+  line-height: 1.7;
   color: var(--ink-soft);
 }
 
@@ -225,7 +233,7 @@ main {
 .feature-grid {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .info-card,
@@ -281,6 +289,8 @@ main {
   display: grid;
   gap: 10px;
   color: var(--ink-soft);
+  text-align: center;
+  padding-top: 24px;
 }
 
 .page-intro {
@@ -291,7 +301,7 @@ main {
 .page-intro h1 {
   margin: 0;
   font-family: 'ZCOOL XiaoWei', serif;
-  font-size: 44px;
+  font-size: clamp(32px, 6vw, 44px);
   color: #fff0dc;
 }
 
@@ -299,7 +309,8 @@ main {
   margin: 0;
   max-width: 900px;
   color: #dce9df;
-  line-height: 1.8;
+  line-height: 1.7;
+  font-size: clamp(15px, 2vw, 16px);
 }
 
 .ai-note {
@@ -307,13 +318,13 @@ main {
   border: 1px solid rgba(47, 125, 89, 0.14);
   border-radius: 22px;
   padding: 18px;
-  line-height: 1.8;
+  line-height: 1.7;
   box-shadow: var(--shadow-soft);
 }
 
 .ai-note h2 {
   margin: 0 0 8px;
-  font-size: 22px;
+  font-size: 20px;
   color: var(--leaf);
 }
 
@@ -326,7 +337,7 @@ main {
 .case-grid {
   display: grid;
   gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .metric-card strong,
@@ -349,6 +360,21 @@ main {
   gap: 10px;
 }
 
+/* 响应式调整 */
+@media (max-width: 1024px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  
+  .site-nav {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 8px;
+  }
+}
+
 @media (max-width: 900px) {
   .split-section {
     grid-template-columns: 1fr;
@@ -357,28 +383,35 @@ main {
   .hero-section {
     padding: 28px 22px;
   }
+  
+  .three-col-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
   .site-shell {
-    padding: 16px 14px 32px;
+    padding: 12px 12px 32px;
   }
 
   .site-header {
-    top: 10px;
-    padding: 14px;
+    top: 8px;
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 16px;
   }
 
   .brand-title {
-    font-size: 28px;
+    font-size: 26px;
+  }
+  
+  .brand-subtitle {
+    font-size: 12px;
   }
 
-  .hero-subtitle {
-    font-size: 20px;
-  }
-
-  .hero-description {
-    font-size: 16px;
+  .nav-link {
+    padding: 6px 12px;
+    font-size: 14px;
   }
 
   .card-surface,
@@ -387,6 +420,15 @@ main {
   .evaluation-section,
   .metric-card,
   .case-card {
-    padding: 18px;
+    padding: 16px;
+    border-radius: 20px;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+  }
+  
+  .primary-cta, .secondary-cta {
+    width: 100%;
   }
 }

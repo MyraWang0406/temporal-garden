@@ -1,3 +1,5 @@
+'use client';
+
 const misconceptionList = [
   '只关注结果，不看变化过程。',
   '看到数值大就判断增长快，没有观察后几天是否突然拉开。',
@@ -60,18 +62,20 @@ export default function EvaluationPage() {
             {badCases.map((item) => (
               <article key={item.title} className="case-card">
                 <h3>{item.title}</h3>
-                <p>
-                  <strong>用户行为描述：</strong>
-                  {item.behavior}
-                </p>
-                <p>
-                  <strong>系统判断错因：</strong>
-                  {item.diagnosis}
-                </p>
-                <p>
-                  <strong>对应改进建议：</strong>
-                  {item.advice}
-                </p>
+                <div className="case-content">
+                  <p>
+                    <strong>用户行为描述：</strong>
+                    {item.behavior}
+                  </p>
+                  <p>
+                    <strong>系统判断错因：</strong>
+                    {item.diagnosis}
+                  </p>
+                  <p>
+                    <strong>对应改进建议：</strong>
+                    {item.advice}
+                  </p>
+                </div>
               </article>
             ))}
           </div>
@@ -82,9 +86,9 @@ export default function EvaluationPage() {
           <div className="metric-grid">
             {metrics.map((item) => (
               <article key={item.label} className="metric-card">
-                <strong>{item.label}</strong>
+                <div className="metric-label">{item.label}</div>
                 <div className="metric-value">{item.value}</div>
-                <p>{item.note}</p>
+                <p className="metric-note">{item.note}</p>
               </article>
             ))}
           </div>
@@ -99,6 +103,34 @@ export default function EvaluationPage() {
           </ul>
         </section>
       </div>
+
+      <style jsx>{`
+        .evaluation-layout { display: grid; gap: 24px; }
+        .evaluation-section { background: var(--panel); border-radius: 28px; padding: 24px; box-shadow: var(--shadow-soft); }
+        .evaluation-section h2 { margin-bottom: 16px; color: var(--leaf); font-family: 'ZCOOL XiaoWei', serif; font-size: 28px; }
+        
+        .evaluation-list { margin: 0; padding-left: 20px; display: grid; gap: 12px; }
+        .evaluation-list li { line-height: 1.6; color: var(--ink-soft); font-size: 16px; }
+
+        .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+        .case-card { background: #fff; border-radius: 20px; padding: 20px; border: 1px solid rgba(0,0,0,0.05); }
+        .case-card h3 { margin-bottom: 12px; font-size: 20px; color: var(--accent-strong); }
+        .case-content { display: grid; gap: 10px; }
+        .case-content p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
+        .case-content strong { color: var(--ink); display: block; margin-bottom: 2px; }
+
+        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .metric-card { background: #fff; border-radius: 20px; padding: 20px; text-align: center; display: flex; flex-direction: column; gap: 8px; }
+        .metric-label { font-size: 14px; font-weight: 700; color: var(--ink-soft); }
+        .metric-value { font-size: 36px; font-weight: 800; color: var(--leaf); }
+        .metric-note { font-size: 13px; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+
+        @media (max-width: 640px) {
+          .evaluation-section { padding: 16px; }
+          .case-grid { grid-template-columns: 1fr; }
+          .metric-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
     </div>
   );
 }

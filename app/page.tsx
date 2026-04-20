@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 const positionCards = [
@@ -88,7 +90,7 @@ export default function HomePage() {
                 <h3>{card.title}</h3>
                 <p>{card.body}</p>
               </div>
-              <span>进入模块 →</span>
+              <span className="cta-text">进入模块 →</span>
             </Link>
           ))}
         </div>
@@ -115,16 +117,54 @@ export default function HomePage() {
       </section>
 
       <footer className="site-footer card-surface">
-        <div>
+        <div className="footer-info">
           <strong>GitHub 仓库入口：</strong>
-          <span>待补充公开仓库链接</span>
+          <a href="https://github.com/MyraWang0406/temporal-garden" target="_blank" rel="noopener noreferrer">
+            MyraWang0406/temporal-garden
+          </a>
         </div>
-        <div>
-          <strong>作者信息：</strong>
-          <span>待补充作者 / 团队介绍</span>
+        <div className="footer-info">
+          <strong>部署平台：</strong>
+          <span>Cloudflare Pages</span>
         </div>
-        <div>说明：当前为原型版本，无需登录，可直接本地运行或部署展示。</div>
-      </footer>
+        <div className="footer-note">说明：当前为原型版本，无需登录，可直接在线体验。</div>
+      </footer >
+
+      <style jsx>{`
+        .feature-card {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .feature-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+        .cta-text {
+          margin-top: 16px;
+          font-weight: 800;
+          color: var(--leaf);
+        }
+        .footer-info {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .footer-note {
+          margin-top: 8px;
+          font-size: 14px;
+          opacity: 0.8;
+        }
+        @media (max-width: 640px) {
+          .footer-info {
+            flex-direction: column;
+            gap: 4px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
